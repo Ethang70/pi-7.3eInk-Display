@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+</head>
+<body>
+    <div class="navigation-bar">
+        <h1>Display Control</h1>
+    </div>
+    
+    <div class="content">  
+        <div class="status">
+            <h2>Status</h2>
+            <p>
+                Time: <br>
+                Location: <br>
+                Currently Displaying: <br>
+                Display Status: <br>
+            </p>
+        </div> 
+        
+        <div class="control">
+            <h2>Control</h2>
+            <button>Refresh Display</button>
+            <button>Clear</button>
+        </div> 
+        
+        <div class="message-display">
+            <h2>Display a message</h2>
+            <form>
+                <label for="message">Type message to display:</label><br>
+                <input type="text" id="message"><br>
+                <label for="time">For how long?</label><br>
+                <input type="text" id="time"><br>
+                <input type="submit" value="Send to Display">
+            </form>
+        </div> 
+        
+        <div class="image-display">
+            <h2>Display an image</h2>
+            <form>
+                <label for="image">Upload image:</label><br>
+                <input type="file" id="image" name="image" accept="image/png, image/jpeg"><br>
+                <input type="submit" value="Send to Display">
+            </form>
+        </div> 
+    </div>
+</body>
+</html> 

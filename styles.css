@@ -1,0 +1,38 @@
+:root {
+    --matteblack: #28282B;
+    --rosegold: #E0BFB8
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: var(--matteblack);
+}
+
+h1{
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+h2{
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: var(--rosegold);
+}
+
+.navigation-bar{
+    width: 100%;
+    height: 40px;
+    background-color: var(--rosegold);
+    font-size: 12px;
+    color: white;
+    padding-left: 10px; padding-top: 5px;
+}
+
+.content{
+    color:white;
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    margin-left: 15px;
+    margin-top: 10px;
+}
