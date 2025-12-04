@@ -8,7 +8,7 @@ if os.path.exists(libdir):
     sys.path.append(libdir)
 
 import logging
-from waveshare_epd import epd7in3f
+import epd7in3f
 import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
