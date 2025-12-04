@@ -8,10 +8,11 @@ if os.path.exists(libdir):
     sys.path.append(libdir)
 
 import logging
-import epd7in3f
+from libs import epd7in3f
 import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
+from libs import color_epd_converter
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -28,8 +29,16 @@ try:
     
     # Drawing on the image
     logging.info("1.Drawing on the image...")
-    Himage = Image.open("image2.png")
-    Himage = Image.composite(Himage, Image.new('RGB', (epd.width, epd.height), epd.WHITE), Himage)
+    Himage = Image.open("image2.png").convert("RGB")
+    Himage = color_epd_converter.convert(Himage,
+                                  orientation="portrait",
+                                  width=480,
+                                  height=800,
+                                  crop_image=False,
+                                  crop_x1=0,
+                                  crop_y1=0,
+                                  crop_x2=480,
+                                  crop_y2=800)
     draw = ImageDraw.Draw(Himage)
     epd.display(epd.getbuffer(Himage))
         
