@@ -2,6 +2,8 @@
 import os
 import logging
 from PIL import Image
+if not hasattr(Image, 'Resampling'):  # Pillow<9.0
+    Image.Resampling = Image
 import argparse
 
 cwd = os.path.abspath(os.path.dirname(__file__))
