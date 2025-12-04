@@ -22,9 +22,9 @@ try:
     logging.info("init and Clear")
     epd.init()
     epd.Clear()
-    font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
-    font18 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 18)
-    font40 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 40)
+    # font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
+    # font18 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 18)
+    # font40 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 40)
     
     # Drawing on the image
     logging.info("1.Drawing on the image...")
