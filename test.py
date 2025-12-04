@@ -14,32 +14,39 @@ from PIL import Image,ImageDraw,ImageFont
 import traceback
 from libs import color_epd_converter
 
+from libs import google_weather as gw
+
 logging.basicConfig(level=logging.DEBUG)
 
 try:
     logging.info("epd7in3f Demo")
+    font24 = ImageFont.load_default(24)
 
     epd = epd7in3f.EPD()   
     logging.info("init and Clear")
     epd.init()
     epd.Clear()
-    # font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
-    # font18 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 18)
-    # font40 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 40)
+    
+    weather = gw.get_current_weather()
+    temp = weather["temperature"]["degrees"]
+    
     
     # Drawing on the image
     logging.info("1.Drawing on the image...")
-    Himage = Image.open("image2.png")
-    Himage = Image.composite(Himage, Image.new('RGB', (epd.width, epd.height), epd.WHITE), Himage)
-    Himage = color_epd_converter.convert(Himage,
-                                  orientation="landscape",
-                                  width=480,
-                                  height=800,
-                                  crop_image=False,
-                                  crop_x1=0,
-                                  crop_y1=0,
-                                  crop_x2=480,
-                                  crop_y2=800)
+    Himage = Image.new('RGB', (epd.width, epd.height), epd.WHITE)
+    draw = ImageDraw.Draw(Himage)
+    # Himage = Image.open("image2.png")
+    # Himage = Image.composite(Himage, Image.new('RGB', (epd.width, epd.height), epd.WHITE), Himage)
+    # Himage = color_epd_converter.convert(Himage,
+    #                               orientation="landscape",
+    #                               width=480,
+    #                               height=800,
+    #                               crop_image=False,
+    #                               crop_x1=0,
+    #                               crop_y1=0,
+    #                               crop_x2=480,
+    #                               crop_y2=800)
+    draw.text((5, 20), 'The temperature is ' + temp, font = font24, fill = epd.YELLOW)
     draw = ImageDraw.Draw(Himage)
     epd.display(epd.getbuffer(Himage))
         
