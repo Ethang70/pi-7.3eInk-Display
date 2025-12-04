@@ -46,7 +46,7 @@ try:
     #                               crop_y1=0,
     #                               crop_x2=480,
     #                               crop_y2=800)
-    draw.text((5, 20), 'The temperature is ' + temp, font = font24, fill = epd.YELLOW)
+    draw.text((5, 20), 'The temperature is ' + str(temp), font = font24, fill = epd.YELLOW)
     draw = ImageDraw.Draw(Himage)
     epd.display(epd.getbuffer(Himage))
         
