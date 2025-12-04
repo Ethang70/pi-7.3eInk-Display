@@ -2,7 +2,7 @@
 import os
 import logging
 from PIL import Image
-if not hasattr(Image, 'Resampling'):  # Pillow<9.0
+if not hasattr(Image, 'Resampling'):  
     Image.Resampling = Image
 import argparse
 

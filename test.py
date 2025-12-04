@@ -31,7 +31,7 @@ try:
     logging.info("1.Drawing on the image...")
     Himage = Image.open("image2.png").convert("RGB")
     Himage = color_epd_converter.convert(Himage,
-                                  orientation="portrait",
+                                  orientation="landscape",
                                   width=480,
                                   height=800,
                                   crop_image=False,
