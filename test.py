@@ -32,13 +32,6 @@ try:
     Himage = Image.composite(Himage, Image.new('RGB', (epd.width, epd.height), epd.WHITE), Himage)
     draw = ImageDraw.Draw(Himage)
     epd.display(epd.getbuffer(Himage))
-    time.sleep(3)
-    
-    logging.info("Clear...")
-    epd.Clear()
-    
-    logging.info("Goto Sleep...")
-    epd.sleep()
         
 except IOError as e:
     logging.info(e)
