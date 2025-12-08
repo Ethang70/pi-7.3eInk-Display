@@ -6,8 +6,6 @@ from libs import google_weather as gw
 
 
 def get_image(epd):
-    logging.basicConfig(level=logging.DEBUG)
-
     try:
         font24 = ImageFont.load_default(24)
         

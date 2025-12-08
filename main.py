@@ -2,6 +2,8 @@ import logging
 
 from image import get_image
 
+logging.basicConfig(level=logging.DEBUG)
+
 class fake_epd:
     BLACK  = 0x000000   #   0000  BGR
     WHITE  = 0xffffff   #   0001
