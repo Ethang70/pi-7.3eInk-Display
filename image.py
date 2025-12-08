@@ -46,3 +46,6 @@ def get_image(epd):
         except:
             logging.info("no connection to epd")
         exit()
+    
+    except Exception as e:
+        logging.info(e)
