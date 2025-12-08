@@ -1,9 +1,12 @@
 import requests
 import json
 import googlemaps
-from datetime import datetime
+import logging
 import os
+
+from datetime import datetime
 from dotenv import load_dotenv
+from pathlib import Path
 
 load_dotenv()
 api_key = os.getenv('google_api')
@@ -24,4 +27,27 @@ def get_current_weather():
     }
     response = requests.get(URL, params=params)
     weather = json.loads(response.text)
+    return weather
+
+def get_weather_condition_icon(icon_uri, condition):
+    if not Path('icons/' + str(condition) + '.png').exists():
+        logging.info(f'Downloading icon for condition: {condition}')
+
+        img_data = requests.get(icon_uri).content
+        with open('icons/' + str(condition) + '.png', 'wb') as handler:
+            handler.write(img_data)
+    else:
+        logging.info(f'Icon for condition: {condition} already exists. Using cached version.')
+    
+    return 'icons/' + str(condition) + '.png'
+
+def get_current_weather_display_info():
+    current = get_current_weather()
+    weather = {}
+    icon_uri = current["weatherCondition"]["iconBaseUri"] + ".png"
+    
+    weather["temperature"] = current["temperature"]["degrees"]
+    weather["condition"] = current["weatherCondition"]["description"]["text"]
+    weather["condition_icon"] = get_weather_condition_icon(icon_uri, weather["condition"])
+
     return weather

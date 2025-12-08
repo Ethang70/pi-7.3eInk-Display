@@ -1,6 +1,5 @@
 import logging
 
-from PIL import Image,ImageDraw,ImageFont
 from image import get_image
 
 class fake_epd:
@@ -30,4 +29,5 @@ image = get_image(epd)
 try:
     epd.display(epd.getbuffer(image))
 except:
+    #image.show()
     image.save("image.jpg")

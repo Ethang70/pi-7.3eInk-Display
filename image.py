@@ -11,16 +11,15 @@ def get_image(epd):
     try:
         font24 = ImageFont.load_default(24)
         
-        weather = gw.get_current_weather()
-        temp = weather["temperature"]["degrees"]
+        weather = gw.get_current_weather_display_info()
         
         
         
         #logging.info("1.Drawing on the image...")
         Himage = Image.new('RGB', (epd.width, epd.height), epd.WHITE)
+        Himage = Image.open(weather["condition_icon"])
+        Himage = Image.composite(Himage, Image.new('RGB', (epd.width, epd.height), epd.WHITE), Himage)
         draw = ImageDraw.Draw(Himage)
-        # Himage = Image.open("image2.png")
-        # Himage = Image.composite(Himage, Image.new('RGB', (epd.width, epd.height), epd.WHITE), Himage)
         # Himage = color_epd_converter.convert(Himage,
         #                               orientation="landscape",
         #                               width=480,
@@ -30,7 +29,7 @@ def get_image(epd):
         #                               crop_y1=0,
         #                               crop_x2=480,
         #                               crop_y2=800)
-        draw.text((5, 20), 'The temperature is ' + str(temp), font = font24, fill = epd.YELLOW)
+        draw.text((30, 20), str(weather["temperature"]) + "°C", font = font24, fill = epd.BLACK)
         draw = ImageDraw.Draw(Himage)
         
 
