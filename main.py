@@ -1,7 +1,7 @@
 import logging
 
 from PIL import Image,ImageDraw,ImageFont
-from test import get_image
+from image import get_image
 
 class fake_epd:
     BLACK = 0x000000
