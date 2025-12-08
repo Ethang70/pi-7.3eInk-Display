@@ -32,13 +32,13 @@ def get_current_weather():
 
 def get_weather_condition_icon(icon_uri, condition):
     path = 'icons/' + str(condition) + '.png'
-    if not Path(path).exists():
-        logging.info(f'Downloading icon for condition: {condition}')
+    # if not Path(path).exists():
+    logging.info(f'Downloading icon for condition: {condition}')
 
-        urllib.request.urlretrieve(icon_uri, path)
+    urllib.request.urlretrieve(icon_uri, path)
         
-    else:
-        logging.info(f'Icon for condition: {condition} already exists. Using cached version.')
+    # else:
+        # logging.info(f'Icon for condition: {condition} already exists. Using cached version.')
     
     return path
 

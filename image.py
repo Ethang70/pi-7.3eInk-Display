@@ -7,7 +7,7 @@ from libs import google_weather as gw
 
 def get_image(epd):
     try:
-        font24 = ImageFont.load_default(24)
+        font24 = ImageFont.load_default(48)
         
         weather = gw.get_current_weather_display_info()
         
@@ -18,16 +18,18 @@ def get_image(epd):
         Himage = Image.open(weather["condition_icon"])
         Himage = Image.composite(Himage, Image.new('RGB', (epd.width, epd.height), epd.WHITE), Himage)
         draw = ImageDraw.Draw(Himage)
-        # Himage = color_epd_converter.convert(Himage,
-        #                               orientation="landscape",
-        #                               width=480,
-        #                               height=800,
-        #                               crop_image=False,
-        #                               crop_x1=0,
-        #                               crop_y1=0,
-        #                               crop_x2=480,
-        #                               crop_y2=800)
-        draw.text((30, 20), str(weather["temperature"]) + "°C", font = font24, fill = epd.BLACK)
+        draw.text((100, 20), str(weather["temperature"]), font = font24, fill = epd.BLACK)
+        
+        
+        Himage = color_epd_converter.convert(Himage,
+                                      orientation="landscape",
+                                      width=480,
+                                      height=800,
+                                      crop_image=False,
+                                      crop_x1=0,
+                                      crop_y1=0,
+                                      crop_x2=480,
+                                      crop_y2=800)
         draw = ImageDraw.Draw(Himage)
         
 
