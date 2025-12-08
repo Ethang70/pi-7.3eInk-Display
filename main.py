@@ -26,7 +26,6 @@ except:
     epd = fake_epd()
 
 image = get_image(epd)
-print(image.size)
 
 try:
     epd.display(epd.getbuffer(image))
