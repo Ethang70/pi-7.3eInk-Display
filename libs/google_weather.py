@@ -3,6 +3,7 @@ import json
 import googlemaps
 import logging
 import os
+import urllib.request
 
 from datetime import datetime
 from dotenv import load_dotenv
@@ -30,16 +31,16 @@ def get_current_weather():
     return weather
 
 def get_weather_condition_icon(icon_uri, condition):
-    if not Path('/icons/' + str(condition) + '.png').exists():
+    path = 'icons/' + str(condition) + '.png'
+    if not Path(path).exists():
         logging.info(f'Downloading icon for condition: {condition}')
 
-        img_data = requests.get(icon_uri).content
-        with open('/icons/' + str(condition) + '.png', 'wb') as handler:
-            handler.write(img_data)
+        urllib.request.urlretrieve(icon_uri, path)
+        
     else:
         logging.info(f'Icon for condition: {condition} already exists. Using cached version.')
     
-    return '/icons/' + str(condition) + '.png'
+    return path
 
 def get_current_weather_display_info():
     current = get_current_weather()
