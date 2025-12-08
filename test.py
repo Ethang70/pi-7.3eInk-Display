@@ -37,15 +37,15 @@ try:
     draw = ImageDraw.Draw(Himage)
     # Himage = Image.open("image2.png")
     # Himage = Image.composite(Himage, Image.new('RGB', (epd.width, epd.height), epd.WHITE), Himage)
-    # Himage = color_epd_converter.convert(Himage,
-    #                               orientation="landscape",
-    #                               width=480,
-    #                               height=800,
-    #                               crop_image=False,
-    #                               crop_x1=0,
-    #                               crop_y1=0,
-    #                               crop_x2=480,
-    #                               crop_y2=800)
+    Himage = color_epd_converter.convert(Himage,
+                                  orientation="landscape",
+                                  width=480,
+                                  height=800,
+                                  crop_image=False,
+                                  crop_x1=0,
+                                  crop_y1=0,
+                                  crop_x2=480,
+                                  crop_y2=800)
     draw.text((5, 20), 'The temperature is ' + str(temp), font = font24, fill = epd.YELLOW)
     draw = ImageDraw.Draw(Himage)
     epd.display(epd.getbuffer(Himage))
