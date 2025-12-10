@@ -48,3 +48,16 @@ def get_current_weather_display_info():
     weather["precipitation"] = str(current["precipitation"]["probability"]["percent"])
 
     return weather
+
+def get_weather_forecast():
+    location = os.getenv('location')
+    latlng = get_latlng(location)
+    URL = 'https://weather.googleapis.com/v1/forecast/days:lookup'
+    params = {
+        "key": api_key,
+        "location.latitude": latlng['lat'],
+        "location.longitude": latlng['lng']
+    }
+    response = requests.get(URL, params=params)
+    forecast = json.loads(response.text)
+    return forecast
