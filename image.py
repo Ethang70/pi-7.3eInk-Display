@@ -32,23 +32,35 @@ def get_image(epd):
     try:        
         weather = gw.get_current_weather_display_info()
         
-        #logging.info("1.Drawing on the image...")
+        logging.info("1.Drawing on the image...")
+
+        # Creating base image
         Himage = Image.new('RGB', (epd.width, epd.height), epd.WHITE)
+
+        # Drawing Weather Icon
         condition = Image.open(weather["condition_icon"])
         condition = condition.resize((ICON_SIZE, ICON_SIZE), Image.NEAREST)
         Himage.paste(condition, (BORDER_PADDING, BORDER_PADDING), condition)
         draw = ImageDraw.Draw(Himage)
 
+        # Drawing Temperature Value
         draw.text((ICON_OFFSET + INTERNAL_PADDING, BORDER_PADDING), weather["temperature"], font = font, fill = epd.BLACK, anchor="lt")
         temperature_offset = font.getlength(weather["temperature"])
         temperature_bbox = draw.textbbox((ICON_OFFSET + INTERNAL_PADDING, BORDER_PADDING), weather["temperature"], font = font, anchor="lt")
-        
+
+        # Drawing °C next to Temperature Value        
         draw.text((ICON_OFFSET + temperature_offset + INTERNAL_PADDING, BORDER_PADDING), "°C", font = font2, fill = epd.BLACK, anchor="lt")
         
+        # Drawing Weather Condition Text
         draw.text((ICON_OFFSET + INTERNAL_PADDING, temperature_bbox[3] + TEXT_PADDING + INTERNAL_PADDING), weather["condition"], font = font2, fill = epd.BLACK, anchor="lt")
         condition_bbox = draw.textbbox((ICON_OFFSET + INTERNAL_PADDING, temperature_bbox[3] + TEXT_PADDING + INTERNAL_PADDING), weather["condition"], font = font2, anchor="lt")
 
+        # Drawing Feels Like Temperature
         draw.text((ICON_OFFSET + INTERNAL_PADDING, condition_bbox[3] + TEXT_PADDING), f'Feels Like: {weather["feels_like"]}°C', font = font3, fill = epd.BLACK, anchor="lt")
+        feels_like_bbox = draw.textbbox((ICON_OFFSET + INTERNAL_PADDING, condition_bbox[3] + TEXT_PADDING),  f'Feels Like: {weather["feels_like"]}°C', font = font3, anchor="lt")
+
+        # Drawing Precipitation Probability
+        draw.text((ICON_OFFSET + INTERNAL_PADDING, feels_like_bbox[3] + TEXT_PADDING),  f'Precipitation: {weather["precipitation"]}%', font = font3, fill = epd.BLACK, anchor="lt")
         
         
         # Himage = color_epd_converter.convert(Himage,

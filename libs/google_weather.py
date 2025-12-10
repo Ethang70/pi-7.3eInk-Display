@@ -45,5 +45,6 @@ def get_current_weather_display_info():
     weather["condition"] = str(current["weatherCondition"]["description"]["text"])
     weather["condition_icon"] = get_weather_condition_icon(icon_uri, weather["condition"])
     weather["feels_like"] = str(current["feelsLikeTemperature"]["degrees"])
+    weather["precipitation"] = str(current["precipitation"]["probability"]["percent"])
 
     return weather
