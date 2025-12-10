@@ -41,9 +41,9 @@ def get_current_weather_display_info():
     weather = {}
     icon_uri = current["weatherCondition"]["iconBaseUri"] + ".png"
     
-    weather["temperature"] = current["temperature"]["degrees"]
-    weather["condition"] = current["weatherCondition"]["description"]["text"]
+    weather["temperature"] = str(current["temperature"]["degrees"])
+    weather["condition"] = str(current["weatherCondition"]["description"]["text"])
     weather["condition_icon"] = get_weather_condition_icon(icon_uri, weather["condition"])
-    weather["feels_like"] = current["feelsLikeTemperature"]["degrees"]
+    weather["feels_like"] = str(current["feelsLikeTemperature"]["degrees"])
 
     return weather
