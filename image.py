@@ -7,6 +7,10 @@ from libs import google_weather as gw
 from dotenv import load_dotenv
 load_dotenv()
 
+PADDING = 25
+ICON_SIZE = 150
+ICON_OFFSET = PADDING + 150
+
 fontType = os.getenv('font')
 
 try:
@@ -29,20 +33,20 @@ def get_image(epd):
         #logging.info("1.Drawing on the image...")
         Himage = Image.new('RGB', (epd.width, epd.height), epd.WHITE)
         condition = Image.open(weather["condition_icon"])
-        condition = condition.resize((150, 150), Image.NEAREST)
-        Himage.paste(condition, (25, 25), condition)
+        condition = condition.resize((ICON_SIZE, ICON_SIZE), Image.NEAREST)
+        Himage.paste(condition, (PADDING, PADDING), condition)
         draw = ImageDraw.Draw(Himage)
 
-        draw.text((175, 25), str(weather["temperature"]), font = font, fill = epd.BLACK, anchor="lt")
+        draw.text((ICON_OFFSET, PADDING), str(weather["temperature"]), font = font, fill = epd.BLACK, anchor="lt")
         temperature_offset = font.getlength(str(weather["temperature"]))
         temperature_box = font.getbbox(str(weather["temperature"]))
 
-        draw.text((175 + temperature_offset, 25), "°C", font = font2, fill = epd.BLACK, anchor="lt")
+        draw.text((ICON_OFFSET + temperature_offset, PADDING), "°C", font = font2, fill = epd.BLACK, anchor="lt")
         
-        draw.text((175, temperature_box[3]), str(weather["condition"]), font = font2, fill = epd.BLACK, anchor="lt")
+        draw.text((ICON_OFFSET, temperature_box[3]), str(weather["condition"]), font = font2, fill = epd.BLACK, anchor="lt")
         condition_box = font2.getbbox(str(weather["condition"]))
 
-        draw.text((175, temperature_box[3] + condition_box[3]), f'Feels Like: {weather["feels_like"]}°C', font = font3, fill = epd.BLACK, anchor="lt")
+        draw.text((ICON_OFFSET, temperature_box[3] + condition_box[3]), f'Feels Like: {weather["feels_like"]}°C', font = font3, fill = epd.BLACK, anchor="lt")
         
         
         # Himage = color_epd_converter.convert(Himage,
